@@ -1,0 +1,6 @@
+## allow 80, 443 connection
+vim /etc/sysconfig/iptables
+-A INPUT -p tcp -m tcp --dport 80 -j ACCEPT
+-A INPUT -p tcp -m tcp --dport 443 -j ACCEPT
+重新加载
+systemctl reload iptables

@@ -135,5 +135,16 @@ RUN set -eux; \
 		exit 1; \
 	fi
 
+# fix 404 error
+RUN mv /usr/local/tomcat/webapps /usr/local/tomcat/webapps.default
+RUN ln -s /usr/local/tomcat/webapps.dist /usr/local/tomcat/webapps
+
+# install custom utils
+# clean and update sources
+RUN apt-get clean && apt-get update
+RUN apt-get install -y vim 
+RUN apt-get install -y net-tools 
+RUN apt-get install -y procps
+
 EXPOSE 8080
 CMD ["catalina.sh", "run"]

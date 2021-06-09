@@ -1,0 +1,22 @@
+version: '3.3'
+services: 
+  redshark.tomcat:
+    image: tomcat:10.0.6-jdk11-buster-apr
+    container_name: redshark.tomcat
+    #environment:
+      #- CATALINA_BASE=/usr/local/tomcat 
+      #- CATALINA_HOME=/usr/local/tomcat 
+      #- CATALINA_TMPDIR=/usr/local/tomcat/temp 
+      #- JRE_HOME=/usr
+      #- CLASSPATH=/usr/local/tomcat/bin/bootstrap.jar:/usr/local/tomcat/bin/tomcat-juli.jar
+    volumes:
+    #  - ./config/tomcat/custom.conf:/usr/local/tomcat/conf/custom.conf
+      - ./config/tomcat/tomcat-users.xml.default:/usr/local/tomcat/conf/tomcat-users.xml
+      - ./config/tomcat/context.xml.default:/usr/local/tomcat/webapps.dist/manager/META-INF/context.xml
+    ports:
+      - 19080:8080 
+
+networks:
+  default:
+    external:
+      name: redshark-bridge
