@@ -10,9 +10,11 @@ services:
       #- JRE_HOME=/usr
       #- CLASSPATH=/usr/local/tomcat/bin/bootstrap.jar:/usr/local/tomcat/bin/tomcat-juli.jar
     volumes:
-    #  - ./config/tomcat/custom.conf:/usr/local/tomcat/conf/custom.conf
+      - ./config/tomcat/manual-scripts:/opt/manual
+      - ./config/tomcat/ROOT/api:/usr/local/tomcat/webapps.dist/api 
       - ./config/tomcat/tomcat-users.xml.default:/usr/local/tomcat/conf/tomcat-users.xml
-      - ./config/tomcat/context.xml.default:/usr/local/tomcat/webapps.dist/manager/META-INF/context.xml
+      - ./config/tomcat/context.xml.manager.default:/usr/local/tomcat/webapps.dist/manager/META-INF/context.xml
+      - ./config/tomcat/context.xml.host_manager.default:/usr/local/tomcat/webapps.dist/host-manager/META-INF/context.xml
     ports:
       - 19080:8080 
 

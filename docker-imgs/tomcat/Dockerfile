@@ -145,6 +145,19 @@ RUN apt-get clean && apt-get update
 RUN apt-get install -y vim 
 RUN apt-get install -y net-tools 
 RUN apt-get install -y procps
+RUN apt-get install -y tofrodos
+
+# custom extend
+RUN mkdir -p /usr/local/tomcat/webapps.dist/api
+RUN mkdir -p /usr/local/tomcat/webapps.dist/admin
+RUN mkdir -p /usr/local/tomcat/webapps.dist/api_2
+RUN mkdir -p /usr/local/tomcat/webapps.dist/admin_2
+RUN mkdir -p /opt/manual
+
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod 755 /entrypoint.sh
+RUN fromdos /entrypoint.sh
 
 EXPOSE 8080
+ENTRYPOINT ["/entrypoint.sh"]
 CMD ["catalina.sh", "run"]
